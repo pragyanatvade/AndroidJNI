@@ -4,14 +4,26 @@ import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
 
 
 public class MainActivity extends ActionBarActivity {
+
+    static {
+        System.loadLibrary("AndroidJNI");
+    }
+
+    public native String startApp(String Path);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        String message = startApp("JNI String");
+
+        TextView tv = (TextView)findViewById(R.id.text_view);
+        tv.setText(message);
     }
 
     @Override
